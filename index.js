@@ -40,7 +40,8 @@ module.exports = function (config, verbose) {
         if (badFiles.length) {
             var message = gutil.colors.red([
                 '\nCSScomb linting failed for these files:',
-                badFiles.map(function(filename) { return '• ' + filename; })
+                badFiles.map(function(filename) { return '• ' + filename; }),
+                'Double-check your selector order.'
             ].join('\n'));
 
             this.emit('error', new gutil.PluginError('gulp-csscomb-lint', message));
