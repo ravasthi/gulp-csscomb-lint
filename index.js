@@ -26,16 +26,16 @@ module.exports = function (config, verbose) {
 
         var comb = new Comb(getConfig(config, file, cb) || 'csscomb');
         var content = file.contents.toString('utf8');
-        var filename = path.relative(file.cwd, file.path)
+        var filename = path.relative(file.cwd, file.path);
 
-        if (content === comb.processString(content, { filename: file.path })) {
+        if (content !== comb.processString(content, { filename: file.path })) {
             badFiles.push(filename);
         }
 
 
         this.push(file);
         return cb();
-    }, function(cb) {
+    }, function (cb) {
 
         if (badFiles.length) {
             var message = gutil.colors.red([
