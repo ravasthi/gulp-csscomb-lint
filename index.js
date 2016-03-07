@@ -27,8 +27,9 @@ module.exports = function (config, verbose) {
         var comb = new Comb(getConfig(config, file, cb) || 'csscomb');
         var content = file.contents.toString('utf8');
         var filename = path.relative(file.cwd, file.path);
+        var processedOutput = comb.processString(content, { filename: file.path });
 
-        if (content !== comb.processString(content, { filename: file.path })) {
+        if (content !== processedOutput) {
             badFiles.push(filename);
         }
 
