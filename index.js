@@ -29,7 +29,7 @@ module.exports = function (config, verbose) {
         var filename = path.relative(file.cwd, file.path);
         var processedOutput = comb.processString(content, {
             filename: file.path,
-            syntax: path.extname(file.path).toLowerCase()
+            syntax: getSyntax(file)
         });
 
         if (content !== processedOutput) {
@@ -53,6 +53,11 @@ module.exports = function (config, verbose) {
         cb();
     });
 };
+
+function getSyntax(file) {
+    var extension = path.extname(file.path).toLowerCase();
+    return extension.replace('.', '');
+}
 
 function invalidExtension(file) {
     var validExtensions = ['.css', '.sass', '.scss', '.less'];
